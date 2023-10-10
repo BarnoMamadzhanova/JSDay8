@@ -26,7 +26,7 @@ const fl12 = new Flowers("Peony", "https://cdn.pixabay.com/photo/2015/06/27/17/2
 
 function display(flowers) {
     document.getElementById("display").innerHTML = "",
-    flowers.forEach((value)=> {
+    flowers.forEach((value) => {
         document.getElementById("display").innerHTML += `
 
         <div class="card-container my-4">
@@ -48,8 +48,7 @@ function display(flowers) {
             </div>
         </div>
          `
-    })
-
+    });
 }
 
 display(flowersArr);
@@ -76,8 +75,9 @@ function addToCart(i){
 
 function createCartInHTML(){
     document.getElementById("cart").innerHTML = "";
+
     flowersCart.forEach(function(value){
-        document.getElementById("cart").innerHTML = `
+        document.getElementById("cart").innerHTML += `
         <div class="card-container my-4">
             <div class="card">
              <div class="product-details"> 
@@ -99,7 +99,7 @@ function createCartInHTML(){
              </div>   
         </div> 
         `
-    })
+    });
 
     let plusBtns = document.querySelectorAll(".plus");
     plusBtns.forEach((btn, i) => {
@@ -129,8 +129,6 @@ function createCartInHTML(){
             createCartInHTML();
         })
     })
-
-
 }
 
 function plusQuantity(i) {
@@ -176,12 +174,13 @@ function removeItem(i){
 
 
 function calcAmount(i){
-    let amount = flowersCart.length;
-    console.log(amount, flowersCart.length);
+// todo
+    let amount = flowersCart.map((x) => x * 1);
 
-    flowersCart.forEach(function(flower) {
-        amount += flowersCart.quantity;
-    })
-    document.getElementById("amount").innerHTML = amount;
+    const sum = amount.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+
+    document.getElementById("amount").innerHTML = sum;
 }
 

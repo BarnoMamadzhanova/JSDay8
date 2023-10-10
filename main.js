@@ -86,7 +86,7 @@ function createCartInHTML(){
                         <div class="product-cart">
                             <button class="plus"><i class="bi bi-plus-square-fill"></i></button>
                             <button class="minus"><i class="bi bi-dash-circle-fill"></i></button>
-                            <button class="quantity"><div >${value.quantity}</div></button>
+                            <button class="quantity">${value.quantity}</button>
                             <button class="close"><i class="bi bi-x-circle-fill"></i></button>
                         </div>
                 </div> 
@@ -106,6 +106,7 @@ function createCartInHTML(){
         btn.addEventListener("click", function(){
             plusQuantity(i);
             calcTotal();
+            calcAmount();
         })
     })
 
@@ -114,6 +115,7 @@ function createCartInHTML(){
         btn.addEventListener("click", function(){
             minusQuantity(i);
             calcTotal();
+            calcAmount();
             createCartInHTML();
         })
     })
@@ -123,9 +125,11 @@ function createCartInHTML(){
         btn.addEventListener("click", function(){
             removeItem(i);
             calcTotal();
+            calcAmount();
             createCartInHTML();
         })
     })
+
 
 }
 
@@ -144,15 +148,38 @@ function minusQuantity(i) {
 }
 
 function calcTotal(){
+    let discount = 0;
     let total = 0;
+    let totalDiscount = 0;
 
     flowersCart.forEach(function(flower){
         total += (flower.price * flower.quantity);
+        discount = (total*10)/100;
+        totalDiscount = total - discount;
     })
-    document.getElementById("total").innerHTML = total + "€";
+    if(total >100) {
+        document.getElementById("total").innerHTML = total + "€";
+        document.getElementById("discount").innerHTML = discount + "€";
+        document.getElementById("totalDiscount").innerHTML = totalDiscount + "€";
+    } else {
+        document.getElementById("total").innerHTML = total + "€";
+        document.getElementById("discount").innerHTML = 0 + "€";
+        document.getElementById("totalDiscount").innerHTML = totalDiscount + "€";
+    }
 }
 
 
 function removeItem(i){
     flowersCart.splice(i, 1);
 }
+
+
+
+function calcAmount(i){
+    let amount = flowersCart.length
+    flowersCart.forEach(function(flower) {
+        amount += flowersCart.quantity;
+    })
+    document.getElementById("amount").innerHTML = amount;
+}
+

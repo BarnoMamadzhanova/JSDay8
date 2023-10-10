@@ -176,7 +176,9 @@ function removeItem(i){
 
 
 function calcAmount(i){
-    let amount = flowersCart.length
+    let amount = flowersCart.length;
+    console.log(amount, flowersCart.length);
+
     flowersCart.forEach(function(flower) {
         amount += flowersCart.quantity;
     })

@@ -49,6 +49,7 @@ function display(flowers) {
         </div>
          `
     })
+
 }
 
 display(flowersArr);
@@ -96,7 +97,7 @@ function createCartInHTML(){
                         </p>
                 </div >
              </div>   
-            </div> 
+        </div> 
         `
     })
 
@@ -146,7 +147,7 @@ function calcTotal(){
     let total = 0;
 
     flowersCart.forEach(function(flower){
-        total = total + (flower.price * flower.quantity);
+        total += (flower.price * flower.quantity);
     })
     document.getElementById("total").innerHTML = total + "€";
 }
